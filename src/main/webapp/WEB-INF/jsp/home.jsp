@@ -17,6 +17,12 @@
        %>
        <li><%=name%></li>
        <% } %>
-    </ul>
+    
+          </ul>
+             <hr>
+         <h3>  <%out.println("No of requests in the session: "+request.getAttribute("ss")); %></h3>
+          <br>
+          <h3> <%out.println("No of requests in the application: "+request.getAttribute("as")); %> </h3>
+       
 </body>
 </html>
