@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ import com.solution.entities.Product;
 import com.solution.exceptions.RecordAlreadyExistsException;
 import com.solution.exceptions.RecordNotFoundException;
 import com.solution.services.ProductService;
+import com.solution.states.MessageFormat;
 
 @RestController
 @RequestMapping("/api/products")
@@ -37,7 +39,7 @@ public class ProductController {
 		}
 		else if(min ==null && max !=null)
 			min=0;
-		else
+		else if(min !=null && max ==null)
 			max=Integer.MAX_VALUE;
 		
 		List<Product> products=productService.getProducts(min, max);
@@ -59,4 +61,26 @@ public class ProductController {
 		productService.addProduct(product);
 		return new ResponseEntity<>(product, HttpStatus.CREATED); //CREATED
 	 
-}}
+}
+    @RequestMapping(value="" , method = {RequestMethod.PUT,RequestMethod.PATCH})
+    public ResponseEntity<Object> updateProduct
+    (@RequestBody Product product) throws RecordNotFoundException {
+    	if(product.getPno() == null) {
+			return new ResponseEntity<>("Product number is required", HttpStatus.BAD_REQUEST);
+		}
+		Product updated =productService.updateProduct(product);
+		return new ResponseEntity<>(updated, HttpStatus.OK); //OK
+  }
+    
+
+@RequestMapping(value="/alternate" , method = {RequestMethod.PUT,RequestMethod.PATCH})
+public ResponseEntity<Object> updateProduct2
+(@RequestBody Product product) throws RecordNotFoundException {
+	if(product.getPno() == null) {
+		return new ResponseEntity<>("Product number is required", HttpStatus.BAD_REQUEST);
+	}
+	Product updated =productService.updateProduct(product);
+	return new ResponseEntity<>(new MessageFormat("Product updated"), HttpStatus.OK); //OK
+}
+ 
+}

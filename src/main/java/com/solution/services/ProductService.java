@@ -34,11 +34,26 @@ public class ProductService {
 	
 		return productRepository.findByPrice(min, max);
 	}
+	
 	public void addProduct(Product product) throws RecordAlreadyExistsException {
 	   if(productRepository.findByPno(product.getPno()) != null) {
 		   throw new RecordAlreadyExistsException();
 	   }
 		productRepository.save(product);
 	}
+	
+	public Product updateProduct(Product product) throws RecordNotFoundException {
+		Product p=productRepository.findByPno(product.getPno());
+		if(p==null) {
+			throw new RecordNotFoundException();
+		}
+		p.setName(product.getName()!=null?product.getName():p.getName());
+		p.setDescription(product.getDescription()!=null?product.getDescription():p.getDescription());
+		p.setPrice(product.getPrice()!=null?product.getPrice():p.getPrice());
+		productRepository.save(p);
+		return p;
+	}
+	
+	
 }
 
