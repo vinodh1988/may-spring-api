@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.solution.entities.Product;
 import com.solution.exceptions.RecordAlreadyExistsException;
+import com.solution.exceptions.RecordNotFoundException;
 import com.solution.repositories.ProductRepository;
 
 @Service
@@ -17,6 +18,16 @@ public class ProductService {
 	
 	public List<Product> getProducts() {
 		return productRepository.findAll();
+	}
+	
+	
+	public Product getProduct(Integer pno) throws RecordNotFoundException {
+	
+		Product p=productRepository.findByPno(pno);
+		if(p==null) {
+			throw new RecordNotFoundException();
+		}
+		return p;
 	}
 	
 	public void addProduct(Product product) throws RecordAlreadyExistsException {

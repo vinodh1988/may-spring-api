@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-
+//instantiated as singleton automatically by Spring
 @ControllerAdvice
 public class CentralExceptionHandler {
 	@ExceptionHandler(value= {IllegalArgumentException.class})
