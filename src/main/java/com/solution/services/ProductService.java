@@ -30,6 +30,10 @@ public class ProductService {
 		return p;
 	}
 	
+	public List<Product> getProducts(Integer min, Integer max) {
+	
+		return productRepository.findByPrice(min, max);
+	}
 	public void addProduct(Product product) throws RecordAlreadyExistsException {
 	   if(productRepository.findByPno(product.getPno()) != null) {
 		   throw new RecordAlreadyExistsException();
