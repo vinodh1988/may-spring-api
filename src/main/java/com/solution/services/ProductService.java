@@ -54,6 +54,14 @@ public class ProductService {
 		return p;
 	}
 	
+	public void deleteProduct(Integer pno) throws RecordNotFoundException {
+		Product p=productRepository.findByPno(pno);
+		if(p==null) {
+			throw new RecordNotFoundException();
+		}
+		productRepository.delete(p);
+	}
+	
 	
 }
 

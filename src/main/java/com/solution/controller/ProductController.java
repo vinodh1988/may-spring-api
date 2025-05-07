@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,7 +73,13 @@ public class ProductController {
 		return new ResponseEntity<>(updated, HttpStatus.OK); //OK
   }
     
-
+    @DeleteMapping("/{pno}")
+    public ResponseEntity<Object> deleteProduct(@PathVariable Integer pno) throws RecordNotFoundException {
+		productService.deleteProduct(pno);
+		return new ResponseEntity<>(new MessageFormat("Product deleted",true), HttpStatus.OK); //OK
+	}
+    
+/*
 @RequestMapping(value="/alternate" , method = {RequestMethod.PUT,RequestMethod.PATCH})
 public ResponseEntity<Object> updateProduct2
 (@RequestBody Product product) throws RecordNotFoundException {
@@ -82,5 +89,6 @@ public ResponseEntity<Object> updateProduct2
 	Product updated =productService.updateProduct(product);
 	return new ResponseEntity<>(new MessageFormat("Product updated"), HttpStatus.OK); //OK
 }
- 
+ */
+
 }
