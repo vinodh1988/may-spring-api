@@ -21,7 +21,7 @@ public class Member {
    @Column	
     private String role;
  
-   @ManyToOne(cascade = CascadeType.ALL)
+   @ManyToOne
    @JoinColumn(name = "pno")
    @JsonIgnore
     private Project project;
