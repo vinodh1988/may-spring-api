@@ -16,7 +16,7 @@ public class Project {
   @Column	
     private String name;
   @Column	
-    private String Technology;
+    private String technology;
   @OneToMany(mappedBy = "project")
     private Set<Member> members;
   
@@ -25,7 +25,7 @@ public class Project {
 	public Project(Integer pno, String name, String technology) {
 		this.pno = pno;
 		this.name = name;
-		Technology = technology;
+		this.technology = technology;
 	}
 	public Integer getPno() {
 		return pno;
@@ -40,10 +40,10 @@ public class Project {
 		this.name = name;
 	}
 	public String getTechnology() {
-		return Technology;
+		return technology;
 	}
 	public void setTechnology(String technology) {
-		Technology = technology;
+		this.technology = technology;
 	}
 	
    	public Set<Member> getMembers() {
