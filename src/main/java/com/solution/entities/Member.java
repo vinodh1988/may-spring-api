@@ -20,6 +20,7 @@ public class Member {
     private String name;
    @Column	
     private String role;
+ 
    @ManyToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "pno")
    @JsonIgnore
