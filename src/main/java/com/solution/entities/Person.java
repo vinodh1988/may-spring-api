@@ -1,8 +1,14 @@
 package com.solution.entities;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+
 public class Person {
+	@Id
      private Integer sno;
-     private String name;
+    @Column 
+	 private String name;
+    @Column 
      private String city;
      
      public Person() {
