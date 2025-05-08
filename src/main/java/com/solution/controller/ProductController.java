@@ -21,8 +21,14 @@ import com.solution.exceptions.RecordNotFoundException;
 import com.solution.services.ProductService;
 import com.solution.states.MessageFormat;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/products")
+@Tag(name = "Product List API", description="All the operations of project entity")
 public class ProductController {
 	@Autowired
 	private ProductService productService;
@@ -31,6 +37,16 @@ public class ProductController {
 	public ResponseEntity<List<Product>> getProducts() {
 		return ResponseEntity.ok(productService.getProducts());
 	}*/
+	@Operation(
+			   summary="Gets all Products",
+			   description="Get All Products by sending min and max"
+			)
+			@ApiResponses(
+				 value = {
+						 @ApiResponse(responseCode="200", description="All products list"),
+						 @ApiResponse(responseCode="500", description="Server related error")
+				 }	
+				)
 	
 	@GetMapping("")
 	public ResponseEntity<List<Product>> getProducts
