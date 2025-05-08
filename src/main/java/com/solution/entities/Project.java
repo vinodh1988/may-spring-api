@@ -2,6 +2,7 @@ package com.solution.entities;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,7 +18,7 @@ public class Project {
     private String name;
   @Column	
     private String technology;
-  @OneToMany(mappedBy = "project")
+  @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<Member> members;
   
 	public Project() {

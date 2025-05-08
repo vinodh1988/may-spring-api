@@ -1,5 +1,7 @@
 package com.solution.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,6 +22,7 @@ public class Member {
     private String role;
    @ManyToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "pno")
+   @JsonIgnore
     private Project project;
    
 	public Member() {
